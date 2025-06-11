@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React YouTube Clone</title>
+    
+  
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+  
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+
+    <style>
+       
+        body {
+            margin: 0;
+            background-color: #0f0f0f;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+ 
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+    <script src="https://unpkg.com/@mui/material@5/umd/material-ui.development.js"></script>
+
+    <script type="text/babel">
+        const { useState } = React;
+        const { 
+            AppBar,
+            Toolbar,
+            Typography,
+            Box,
+            TextField,
+            IconButton,
+            Card,
+            CardMedia,
+            CardContent,
+            Grid,
+            ThemeProvider,
+            createTheme
+        } = MaterialUI;
+
+       
+        const mockVideoData = [
+            { id: 1, title: 'Building a React App from Scratch', channel: 'React Tutorials', thumbnail: 'https://i.ytimg.com/vi/s2skans2dP4/hq720.jpg' },
+            { id: 2, title: 'CSS Grid Crash Course 2024', channel: 'Web Dev Simplified', thumbnail: 'https://i.ytimg.com/vi/EFafSYg-j-4/hq720.jpg' },
+            { id: 3, title: 'Material UI v5 Tutorial', channel: 'The Net Ninja', thumbnail: 'https://i.ytimg.com/vi/o1chMIgT25I/hq720.jpg' },
+            { id: 4, title: '1-Hour Lo-fi Music for Studying', channel: 'Lofi Girl', thumbnail: 'https://i.ytimg.com/vi/5qap5aO4i9A/hq720.jpg' },
+            { id: 5, title: 'JavaScript Full Course for Beginners', channel: 'freeCodeCamp.org', thumbnail: 'https://i.ytimg.com/vi/PkZNo7MFNFg/hq720.jpg' },
+            { id: 6, title: 'Unboxing the new M3 MacBook Pro', channel: 'MKBHD', thumbnail: 'https://i.ytimg.com/vi/B316p3I1-0I/hq720.jpg' },
+            { id: 7, title: 'How AI is Changing the World', channel: 'Kurzgesagt', thumbnail: 'https://i.ytimg.com/vi/Sqa80TsoJrg/hq720.jpg' },
+            { id: 8, title: 'The Ultimate Guide to Node.js', channel: 'Fireship', thumbnail: 'https://i.ytimg.com/vi/ENrzD9HA0fs/hq720.jpg' },
+        ];
+
+       
+        function VideoCard({ video }) {
+            return (
+                <Card sx={{ height: '100%', backgroundColor: '#1e1e1e', border: 'none', boxShadow: 'none' }}>
+                    <CardMedia
+                        component="img"
+                        image={video.thumbnail}
+                        alt={video.title}
+                        sx={{ height: 180 }}
+                    />
+                    <CardContent>
+                        <Typography variant="subtitle1" fontWeight="bold" color="common.white">
+                            {video.title}
+                        </Typography>
+                        <Typography variant="body2" color="grey.400">
+                            {video.channel}
+                        </Typography>
+                    </CardContent>
+                </Card>
+            );
+        }
+        
+   
+        function App() {
+          
+            const darkTheme = createTheme({
+                palette: {
+                    mode: 'dark',
+                    primary: { main: '#ff0000' }
+                },
+            });
+
+            return (
+                <ThemeProvider theme={darkTheme}>
+                    <Box sx={{ flexGrow: 1 }}>
+                        {}
+                        <AppBar position="sticky" sx={{ backgroundColor: '#0f0f0f' }}>
+                            <Toolbar>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="logo" height="20px" />
+                                <Typography variant="h6" sx={{ ml: 1, flexGrow: 1 }}>
+                                    YouTube
+                                </Typography>
+                                <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+                                    <TextField 
+                                        variant="outlined"
+                                        placeholder="Search"
+                                        size="small"
+                                        sx={{ width: '50%', backgroundColor: '#121212' }}
+                                    />
+                                    <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+                                        <i className="material-icons">search</i>
+                                    </IconButton>
+                                </Box>
+                            </Toolbar>
+                        </AppBar>
+
+                        {}
+                        <Box p={3}>
+                            <Grid container spacing={3}>
+                                {mockVideoData.map((video) => (
+                                    <Grid item xs={12} sm={6} md={4} lg={3} key={video.id}>
+                                        <VideoCard video={video} />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Box>
+                    </Box>
+                </ThemeProvider>
+            );
+        }
+
+       
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+
+    </script>
+</body>
+</html>
