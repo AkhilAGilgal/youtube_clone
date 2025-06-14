@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import { ChannelDetail, VideoDetail, SearchFeed, Navbar, Feed } from './components';
 
 const App = () => (
-  <BrowserRouter>
+  <BrowserRouter basename="/youtube_clone/"> {}
     <Box sx={{ backgroundColor: '#000' }}>
       <Navbar />
       <Routes>
